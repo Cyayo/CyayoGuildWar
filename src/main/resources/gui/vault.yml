@@ -1,0 +1,44 @@
+title: "&8War Vault - {guild} (Hal. {page})"
+size: 54
+
+# Border Filler settings (slots can be customized inline)
+filler:
+  material: "GRAY_STAINED_GLASS_PANE"
+  name: " "
+  lore: []
+  slots: [0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 49, 51, 52, 53]
+
+# Reward slots where items are deposited and can be withdrawn from (28 slots per page)
+reward-slots: [10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42, 43]
+
+# Navigation Buttons
+back-page-item:
+  slot: 48
+  material: "ARROW"
+  name: "&c&l\u00ab Halaman Sebelumnya &7(Ke Hal. {prev_page})"
+
+next-page-item:
+  slot: 50
+  material: "ARROW"
+  name: "&a&lHalaman Berikutnya \u00bb &7(Ke Hal. {next_page})"
+
+# Guild Info Item settings
+info-item:
+  slot: 4
+  material: "BOOK"
+  name: "&6&lInformasi Guild: {guild}"
+  lore:
+    - "&7Gunakan brankas ini untuk mengambil"
+    - "&7item bonus hasil dari penguasaan wilayah."
+    - ""
+    - "&eTingkat Guild: &f{tier}"
+    - "&eJumlah Wilayah Dikuasai: &f{territories_count}"
+
+permissions:
+  open:
+    - "Master"
+    - "Officer"
+    - "Member"
+  withdraw:
+    - "Master"
+    - "Officer"

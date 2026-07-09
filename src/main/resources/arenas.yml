@@ -1,0 +1,40 @@
+# ┌──────────────────────────────────────────────────┐
+# │              CYAYOGUILDWAR ARENAS CONFIG         │
+# └──────────────────────────────────────────────────┘
+# Anda bisa mendaftarkan beberapa arena untuk mencegah tabrakan.
+# Jika arena1 sedang digunakan, perang berikutnya akan otomatis menggunakan arena2.
+
+arenas:
+  arena1:
+    world: "world"
+    # Nama region WorldGuard untuk arena ini (spectator akan dipaksa tetap berada di dalam region ini)
+    arena-region: "arena1_region"
+    # Lokasi Spawnpoint saat masuk arena
+    spawn-attacker:
+      x: 100.5
+      y: 70.0
+      z: 100.5
+      yaw: 0.0
+      pitch: 0.0
+    spawn-defender:
+      x: 100.5
+      y: 70.0
+      z: 120.5
+      yaw: 180.0
+      pitch: 0.0
+
+  arena2:
+    world: "world"
+    arena-region: "arena2_region"
+    spawn-attacker:
+      x: 200.5
+      y: 70.0
+      z: 200.5
+      yaw: 0.0
+      pitch: 0.0
+    spawn-defender:
+      x: 200.5
+      y: 70.0
+      z: 220.5
+      yaw: 180.0
+      pitch: 0.0

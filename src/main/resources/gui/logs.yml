@@ -1,0 +1,54 @@
+# ┌──────────────────────────────────────────────────┐
+# │              PENGATURAN GUI LOGS GUILD           │
+# └──────────────────────────────────────────────────┘
+# Konfigurasi inventori Chest GUI untuk melihat log lengkap aktivitas guild
+
+title: "&8War Logs: {guild}"
+size: 45
+
+filler:
+  mode: "custom"
+  material: "GRAY_STAINED_GLASS_PANE"
+  name: " "
+  slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44]
+
+info-item:
+  slot: 4
+  material: "BOOK"
+  name: "&6&lLogs Guild: &e{guild}"
+  lore:
+    - "&7Menampilkan 10 aktivitas terbaru"
+    - "&7dari sistem Guild War."
+
+log-item:
+  material: "PAPER"
+  name: "&e&lAktivitas Guild"
+  # Slots where paper logs will be displayed (last 10 slots)
+  slots: [10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34]
+  lore:
+    - "&7Waktu: &f{time}"
+    - ""
+    - "&7Aktivitas: {message}"
+    - "{details}"
+  # Format tampilan per item di dalam list {details}
+  details-format: " &8- &f{item}"
+  # Format waktu log (Menggunakan standar SimpleDateFormat Java)
+  timestamp-format: "yyyy-MM-dd HH:mm:ss"
+
+# Format Pesan Log (Diatur eksklusif per GUI logs)
+# Mendukung single string maupun format list (multi-baris)
+formats:
+  capture-victory:
+    - "&aBerhasil merebut wilayah:"
+    - "  &e{territory} &a! &7(Serangan)"
+  capture-defeat: "&cWilayah &e{territory} &ctelah diambil alih oleh Guild &b{guild}&c."
+  defend-victory: "&aBerhasil mempertahankan wilayah &e{territory} &a! &7(Pertahanan)"
+  defend-defeat: "&cGagal menyerang wilayah &e{territory} &cmilik Guild &b{guild}&c."
+  periodic-rewards: "&aMenerima bonus teritori"
+
+back-item:
+  slot: 40
+  material: "ARROW"
+  name: "&c&l« Kembali"
+  lore:
+    - "&7Klik untuk kembali ke statistik guild."

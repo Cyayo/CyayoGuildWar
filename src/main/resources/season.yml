@@ -1,0 +1,54 @@
+# Status sistem Season secara keseluruhan (true = aktifkan seluruh sistem season & hadiah, false = nonaktifkan total)
+enabled: false
+
+# Angka Season Saat Ini
+current-season: 1
+
+# Tanggal mulai musim pertama kali (Format: YYYY-MM-DD HH:mm:ss)
+start-date: "2026-07-09 00:00:00"
+# Durasi per musim: e.g. "7d" (7 hari), "14d" (14 hari), "30d" (30 hari), "1mo" (1 bulan)
+duration: "7d"
+
+# Masa damai setelah reset season (Format durasi: e.g. "1d" untuk 1 hari, "12h" untuk 12 jam, "0s" jika tidak ada)
+peace-duration: "1d"
+
+# Timestamp berakhirnya masa damai saat ini (Otomatis terisi/diupdate oleh plugin, jangan diubah manual)
+peace-period-end-timestamp: 0
+
+# Minimal poin SR yang harus diraih untuk berhak mendapatkan reward peringkat akhir musim
+min-sr-threshold: 100
+
+# Hadiah Season berdasarkan Peringkat Akhir (Top Standings)
+# Item otomatis ditransfer ke War Vault Guild saat season berakhir / direset
+# Mendukung item standar maupun MMOItems
+rewards:
+  top-1:
+    items:
+      - material: "DIAMOND"
+        amount: 64
+        custom-name: "&6&lReward Season: Juara 1"
+        custom-lore:
+          - "&7Hadiah untuk peringkat 1 Season Rating!"
+      # Contoh penggunaan MMOItems:
+      # - mmoitems:
+      #     type: "SWORD"
+      #     id: "EXCALIBUR"
+      #     amount: 1
+    commands:
+      - "broadcast &a&lGuild {guild} telah menjuarai Season Rating dengan {points} SR!"
+  top-2:
+    items:
+      - material: "DIAMOND"
+        amount: 32
+        custom-name: "&6&lReward Season: Juara 2"
+        custom-lore:
+          - "&7Hadiah untuk peringkat 2 Season Rating!"
+    commands: []
+  top-3:
+    items:
+      - material: "DIAMOND"
+        amount: 16
+        custom-name: "&6&lReward Season: Juara 3"
+        custom-lore:
+          - "&7Hadiah untuk peringkat 3 Season Rating!"
+    commands: []

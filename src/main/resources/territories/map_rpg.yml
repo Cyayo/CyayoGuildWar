@@ -1,0 +1,92 @@
+# ┌──────────────────────────────────────────────────┐
+# │              CYAYOGUILDWAR TERRITORIES - RPG MAP │
+# └──────────────────────────────────────────────────┘
+# Nama di bawah ini (contoh: lembah_naga) harus sama persis dengan NAMA REGION WORLDGUARD
+territories:
+  lembah_naga:
+    display-name: "&d&lLembah Naga"
+    cooldown-minutes: 5 # Cooldown setelah teritori direbut
+
+    # Lore bebas untuk item Efek & Bonus di GUI /war info
+    # Tulis sesuka kamu, supports warna & format
+    buff-lore:
+      - " &8- &d⚡ &7Strength II (saat di dalam region)"
+      - " &8- &b🏃 &7Speed I (saat di dalam region)"
+      - " &8- &e⛏ &7Mining XP &a+5%"
+      - " &8- &2🌿 &7Foraging XP &a+10%"
+      - " &8- &a🍀 &7Raw Luck &a+5.0"
+      - " &8- &6💎 &7Kristal Lembah Naga &7(50% tiap 10 menit)"
+      - " &8- &6🐉 &7Dragon Scale MMOItems &7(25% tiap 10 menit)"
+      - " &8- &f💰 &7Ekonomi: eco give {player} 100 &7(100%)"
+      - " &8- &f⭐ &7XP: xp give {player} 50 &7(30%)"
+
+    # Lokasi Banner (Dapat di-set otomatis via /war setbanner atau ditulis manual)
+    banner:
+      world: "world"
+      x: 100
+      y: 65
+      z: -250
+      
+    # Pengaturan Buff untuk anggota Guild yang menguasai wilayah ini
+    buffs:
+      # A. Potion Effects (Hanya aktif ketika player berada di dalam region territory tersebut)
+      potion-effects:
+        - "INCREASE_DAMAGE:1" # Strength II
+        - "SPEED:0"           # Speed I
+        
+      # B. AuraSkills XP Multiplier (Bonus XP hanya saat melakukan aktivitas di dalam teritori tersebut)
+      # Format -> <nama_skill>: <multiplier> (1.05 = +5% bonus XP)
+      auraskills-xp:
+        mining: 1.05
+        foraging: 1.10
+        
+      # C. CyayoLuckRNG Luck Bonus (Bonus Raw Luck aditif yang didapat player di region ini)
+      # Nilai ini aditif (ditambahkan langsung ke Raw Luck, misal +5.0)
+      cyayoluckrng-luck: 5.0
+      
+      # D. Periodical Items (Diberikan ke seluruh member guild online)
+      periodical-items:
+        interval-minutes: 10
+        items:
+          # Contoh 1: Item Vanilla biasa dengan Chance 50%
+          - material: "DIAMOND"
+            amount: 1
+            chance: 50.0
+            name: "&b&lKristal Lembah Naga"
+            lore:
+              - "&7Diberikan secara periodik dari"
+              - "&7hasil tambang Lembah Naga."
+          # Contoh 2: Item MMOItems dengan Chance 25% (Jika plugin MMOItems dipasang)
+          - mmoitem:
+              type: "MATERIAL"
+              id: "DRAGON_SCALE"
+            amount: 1
+            chance: 25.0
+              
+      # E. Periodical Commands (Menjalankan command konsol untuk seluruh member guild online)
+      periodical-commands:
+        interval-minutes: 5
+        commands:
+          - command: "eco give {player} 100"
+            chance: 100.0 # Selalu dijalankan (100% peluang)
+          - command: "xp give {player} 50"
+            chance: 30.0  # Peluang 30%
+
+  hutan_mati:
+    display-name: "&4&lHutan Kematian"
+    cooldown-minutes: 3
+    banner:
+      world: "world"
+      x: -500
+      y: 70
+      z: 120
+
+    buff-lore:
+      - " &8- &c❤ &7Regeneration I (saat di dalam region)"
+      - " &8- &a🍀 &7Raw Luck &a+10.0"
+
+    # hutan_mati hanya memiliki Potion dan Luck.
+    buffs:
+      potion-effects:
+        - "REGENERATION:0"
+      cyayoluckrng-luck: 10.0

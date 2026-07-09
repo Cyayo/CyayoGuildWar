@@ -1,0 +1,63 @@
+# ┌──────────────────────────────────────────────────┐
+# │              PENGATURAN GUI STATS GUILD          │
+# └──────────────────────────────────────────────────┘
+# Konfigurasi inventori Chest GUI untuk perintah /war stats
+
+title: "&8Statistik Guild: {guild}"
+size: 45
+
+filler:
+  mode: "custom"
+  material: "GRAY_STAINED_GLASS_PANE"
+  name: " "
+  # Border untuk GUI size 45 (pinggir saja)
+  slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44]
+
+banner-item:
+  slot: 13
+  name: "&6&lBanner Guild Kamu"
+  lore:
+    - "&7"
+    - "&eKlik untuk mengubah banner guild."
+    - "&e(Pegang banner di tangan kamu)"
+    - "&7"
+    - "&c* Catatan: Membutuhkan izin kelola banner."
+
+territory-item:
+  slot: 22
+  material: "FILLED_MAP"
+  name: "&a&lWilayah Dikuasai"
+  lore:
+    - "&7Berikut wilayah yang dikuasai guild:"
+    - ""
+    - "{territories}"
+    - ""
+    - "&eKlik untuk melihat detail wilayah!"
+  lore-entry: " &8- &e{territory} &8| {status}"
+  lore-empty: " &8- &cBelum menguasai wilayah apapun."
+  status-cooldown: "&cCooldown ({time})"
+  status-ready: "&aSiap"
+
+logs-item:
+  slot: 31
+  material: "WRITABLE_BOOK"
+  name: "&b&lCatatan Aktivitas Guild"
+  lore:
+    - "&7Berikut 10 aktivitas terakhir guild:"
+    - ""
+    - "{logs}"
+    - ""
+    - "&eKlik untuk melihat logs lengkap!"
+  # Format tampilan per baris log di dalam menu statistik utama
+  entry-format: "&8[{time}] {message}"
+  # Format waktu log (Menggunakan standar SimpleDateFormat Java)
+  timestamp-format: "yyyy-MM-dd HH:mm:ss"
+  lore-empty: " &8- &cBelum ada catatan aktivitas."
+
+# Format Pesan Log khusus untuk GUI statistik utama
+formats:
+  capture-victory: "&aBerhasil merebut wilayah &e{territory} &a! &7(Serangan)"
+  capture-defeat: "&cWilayah &e{territory} &ctelah diambil alih oleh Guild &b{guild}&c."
+  defend-victory: "&aBerhasil mempertahankan wilayah &e{territory} &a! &7(Pertahanan)"
+  defend-defeat: "&cGagal menyerang wilayah &e{territory} &cmilik Guild &b{guild}&c."
+  periodic-rewards: "&aMenerima bonus teritori"

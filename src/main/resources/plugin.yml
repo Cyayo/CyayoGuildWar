@@ -1,0 +1,38 @@
+name: CyayoGuildWar
+version: '1.0.0'
+main: id.cyayo.guildwar.CyayoGuildWar
+api-version: '1.21'
+description: Plugin perebutan wilayah teritori dengan integrasi Guilds, AuraSkills, dan CyayoLuckRNG.
+authors: [ Cyayo ]
+
+depend:
+  - WorldGuard
+  - PlaceholderAPI
+
+softdepend:
+  - Guilds
+  - AuraSkills
+  - CyayoLuckRNG
+  - MMOItems
+  - CyayoDeathPenalty
+  - CyayoPvP
+
+commands:
+  war:
+    description: Perintah utama CyayoGuildWar
+    aliases: [ guildwar, gw ]
+    usage: /war <subcommand>
+    permission: cyayoguildwar.use
+  waradmin:
+    description: Perintah admin CyayoGuildWar
+    aliases: [ guildwaradmin, gwa ]
+    usage: /waradmin <subcommand>
+    permission: cyayoguildwar.admin
+
+permissions:
+  cyayoguildwar.use:
+    description: Akses perintah /war info dan pertarungan teritori
+    default: true
+  cyayoguildwar.admin:
+    description: Akses perintah admin seperti setbanner dan reload
+    default: op

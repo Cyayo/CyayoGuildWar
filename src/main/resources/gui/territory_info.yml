@@ -1,0 +1,77 @@
+# ┌──────────────────────────────────────────────────┐
+# │          PENGATURAN GUI DETAIL WILAYAH           │
+# └──────────────────────────────────────────────────┘
+# Konfigurasi inventori Chest GUI untuk detail wilayah kekuasaan
+
+# Judul GUI detail wilayah (Mendukung Placeholder {territory})
+title: "&8Detail Wilayah: {territory}"
+# Ukuran slot GUI (kelipatan 9: 9, 18, 27, 36, 45, 54)
+size: 27
+
+# A. Item Informasi Wilayah (Slot 10)
+info-item:
+  slot: 10
+  material: "MAP"
+  name: "&6&lInformasi Wilayah"
+  lore:
+    - "&7"
+    - "&7Nama Wilayah: &e{display_name}"
+    - "&7Region WG: &f{region_id}"
+    - "&7Pemilik: {owner}"
+    - "&7Status: {status}"
+    - "&7"
+  # Tampilan status kepemilikan wilayah
+  owner-none: "&cBelum ada pemilik"
+  status-cooldown: "&cMasa Cooldown ({time})"
+  status-active: "&aDapat Diserang"
+  status-unclaimed: "&aDapat Diklaim Instan"
+
+# B. Item Efek/Buff Wilayah (Slot 13)
+buffs-item:
+  slot: 13
+  material: "BREWING_STAND"
+  name: "&a&lEfek & Bonus Wilayah"
+  lore:
+    - "&7Berikut efek & bonus periodik wilayah:"
+    - ""
+    - "{buffs}"
+  lore-empty: " &8- &7Tidak ada efek/buff aktif di teritori ini."
+
+# C. Item Tombol Aksi (Slot 16)
+action-item:
+  slot: 16
+  # 1. Mode Klaim Instan (jika wilayah belum dimiliki siapapun)
+  claim:
+    material: "GREEN_WOOL"
+    name: "&a&lKlaim Wilayah"
+    lore:
+      - "&7Wilayah ini belum dikuasai."
+      - "&7Klik di sini untuk langsung mengklaim"
+      - "&7wilayah ini untuk Guild kamu!"
+  # 2. Mode Serang/War (jika wilayah dimiliki guild lain)
+  attack:
+    material: "RED_WOOL"
+    name: "&c&lDeklarasikan Perang"
+    lore:
+      - "&7Klik di sini untuk memulai serangan"
+      - "&7terhadap Guild &b{owner}&7."
+      - ""
+      - "&c&lPERHATIAN:"
+      - "&7Anggota regu harus berada di wilayah ini"
+      - "&7sebelum timer persiapan war berakhir!"
+  # 3. Mode Wilayah Milik Sendiri
+  owned:
+    material: "BLUE_WOOL"
+    name: "&b&lWilayah Milikmu"
+    lore:
+      - "&7Guild kamu menguasai wilayah ini."
+      - "&7Pegang Banner lalu ketik &6/war banner"
+      - "&7untuk merubah desain banner wilayah!"
+
+# D. Item Pengisi Slot Kosong (Background)
+filler:
+  mode: "custom"
+  material: "GRAY_STAINED_GLASS_PANE"
+  name: " "
+  # Border untuk GUI size 27 (pinggir saja)
+  slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]

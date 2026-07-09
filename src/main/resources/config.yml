@@ -1,0 +1,320 @@
+# ┌──────────────────────────────────────────────────┐
+# │              CYAYOGUILDWAR MAIN CONFIG           │
+# └──────────────────────────────────────────────────┘
+
+# Opsi penyimpanan data: YAML (data.yml) atau SQLITE
+database:
+  type: "YAML" # YAML atau SQLITE
+  sqlite-file: "database.db"
+
+# Pengaturan Perang
+war-settings:
+  # Durasi persiapan sebelum war dimulai (dalam detik)
+  # Setelah timer ini habis, pemain akan diteleportasi ke arena
+  preparation-time-seconds: 60
+  # Durasi maksimum pertempuran di arena (dalam detik) sebelum otomatis dianggap seri/selesai
+  max-war-duration-seconds: 600
+  # Jumlah minimum pemain dari masing-masing guild untuk memulai teleportasi ke arena
+  min-players-per-guild: 1
+  # Jumlah maksimum pemain dari masing-masing guild yang boleh ikut bertarung di arena
+  max-players-per-guild: 5
+
+  # Efek glow (bercahaya) pada pemain yang bertarung di arena war
+  glow-effect: true
+  # Pilihan warna glow (RED, BLUE, GREEN, GOLD, dll - menggunakan ChatColor Minecraft)
+  glow-color-attacker: "RED"
+  glow-color-defender: "BLUE"
+
+  # Aturan drop item saat mati di arena war (Bypass/Override CyayoDeathPenalty & CyayoPvP)
+  # true = Item pemain akan drop/jatuh di lantai arena war saat mati
+  # false = Keep Inventory aktif (tidak ada item/armor yang hilang di arena)
+  drop-items-on-death: false
+
+  # Jika true, inventory player akan dikembalikan persis ke kondisi awal sebelum war dimulai.
+  # Jika false, perubahan inventory selama bertarung (seperti totem pecah, ramuan habis) akan tetap tersimpan permanen.
+  restore-inventory-after-war: false
+
+  # Durasi selebrasi kembang api setelah war selesai sebelum pemain diteleportasi pulang (dalam detik)
+  celebration-time-seconds: 10
+
+  # Jumlah maksimum teritori yang boleh diserang/war aktif oleh satu Guild secara bersamaan
+  max-simultaneous-attacks-per-guild: 1
+
+  # Sistem Sudden Death (Meningkatkan efek Strength agar war cepat selesai)
+  sudden-death:
+    enabled: true
+    # Penambahan efek Strength setiap X detik (60 detik = 1 menit)
+    interval-seconds: 60
+    # Level Strength awal saat war dimulai (0 = tidak ada Strength bawaan)
+    start-level: 0
+
+# ┌──────────────────────────────────────────────────┐
+# │              PERSYARATAN PANGAT/RANK GUILD       │
+# └──────────────────────────────────────────────────┘
+# Atur pangkat apa saja yang diizinkan melakukan aksi teritori.
+# Pangkat bawaan (default) GlareMasters Guilds:
+# - Master (Ketua Guild)
+# - Officer (Wakil/Moderator Guild)
+# - Member (Anggota Biasa)
+# - Initiate (Anggota Baru)
+# (Case-Sensitive, sesuaikan dengan nama pangkat jika Anda mengubahnya di config plugin Guilds)
+guild-rank-requirements:
+  # Pangkat yang boleh menyerang wilayah (/war info -> Deklarasi Perang)
+  declare-war:
+    - "Master"
+    - "Officer"
+  # Pangkat yang boleh menyimpan/mengubah banner wilayah (/war banner)
+  modify-banner:
+    - "Master"
+
+# ┌──────────────────────────────────────────────────┐
+# │              PENGATURAN DISCORD WEBHOOK          │
+# └──────────────────────────────────────────────────┘
+discord-webhook:
+  enabled: false
+  # Mode pengiriman webhook: "embed" (menggunakan tampilan kotak embed) atau "text" (hanya mengirim pesan teks/ping biasa)
+  mode: "embed"
+  url: "https://discord.com/api/webhooks/YOUR_WEBHOOK_URL_HERE"
+  # Avatar & Username Webhook
+  username: "Cyayo Guild War Bot"
+  avatar-url: "https://example.com/logo.png"
+
+  # Gaya pesan saat War Dimulai (dapat dinonaktifkan lewat enabled: false)
+  on-war-start:
+    enabled: false
+    title: "⚔️ DEKLARASI PERANG WILAYAH ⚔️"
+    color: "#ff3333"
+    description: |
+      Guild **{attacker}** telah menyatakan perang terhadap wilayah **{territory}**!
+      Wilayah ini saat ini dipertahankan oleh Guild **{defender}** (Tier {defender_tier}).
+      
+      Perang akan segera dimulai di Arena dalam waktu 60 detik!
+    footer: "CyayoGuildWar System • Waktu: {time}"
+    thumbnail: "https://example.com/swords.png"
+
+  # Gaya pesan saat War Selesai (Kemenangan Attacker)
+  on-war-end-win:
+    enabled: true
+    title: "🏆 WILAYAH BERHASIL DIREBUT! 🏆"
+    color: "#33ff33"
+    description: |
+      Selamat kepada Guild **{attacker}**! 
+      Mereka berhasil mengalahkan pertahanan Guild **{defender}** dan kini resmi menguasai wilayah **{territory}**.
+      
+      **Partisipan Perang:**
+      {participants}
+      
+      Wilayah **{territory}** sekarang memasuki masa perlindungan (cooldown) selama {cooldown} menit.
+    footer: "CyayoGuildWar System • Waktu: {time}"
+    thumbnail: "https://example.com/trophy.png"
+
+  # Gaya pesan saat War Selesai (Defender Berhasil Mempertahankan)
+  on-war-end-fail:
+    enabled: true
+    title: "🛡️ PERTAHANAN BERHASIL! 🛡️"
+    color: "#3399ff"
+    description: |
+      Guild **{defender}** berhasil mempertahankan wilayah **{territory}** dari serangan Guild **{attacker}**!
+      
+      Wilayah ini tidak memasuki cooldown dan dapat diserang kembali kapan saja.
+    footer: "CyayoGuildWar System • Waktu: {time}"
+
+# ┌──────────────────────────────────────────────────┐
+# │              PENGATURAN PESAN / TRANSLASI        │
+# └──────────────────────────────────────────────────┘
+messages:
+  prefix: "&7[&c&lWar&7] &r"
+  
+  # War Vault Admin Messages
+  admin-give-success: "&aBerhasil mengirimkan &e{amount}x {item} &ake War Vault Guild &b{guild}&a."
+  admin-give-received: "&aSeorang admin telah mengirimkan &e{amount}x {item} &ake War Vault Guild kamu!"
+  
+  # War Vault Reward Deposited Messages
+  periodic-reward-vault-deposited: "&aGuild kamu menerima bonus &e{amount}x {item} &adari wilayah &6{territory}&a! Item telah dimasukkan ke War Vault."
+  # Set ke true untuk mengaktifkan notifikasi deposit periodik teritori, false untuk mematikan total
+  notify-periodic-vault-deposit: true
+  # Format notifikasi yang digabung (mencegah spam chat jika banyak item didapat sekaligus)
+  periodic-reward-vault-deposited-consolidated: "&aReward buff kepemilikan teritori berhasil dikirimkan ke War Vault!"
+
+  # =========================================================================
+  # 1. PESAN PRIBADI (Hanya dikirim ke pemain bersangkutan)
+  # =========================================================================
+  no-permission: "&cKamu tidak memiliki izin untuk melakukan ini."
+  not-in-guild: "&cKamu harus masuk ke dalam Guild terlebih dahulu untuk melakukan ini."
+  not-guild-leader: "&cKamu harus menjabat sebagai ketua/moderator Guild untuk memulai war."
+  no-region: "&cKamu harus berdiri di salah satu wilayah kekuasaan untuk menggunakan perintah ini."
+  cooldown: "&cWilayah ini sedang berada dalam masa cooldown selama {time} lagi."
+  already-warring: "&cWilayah ini sedang dalam pertempuran!"
+  command-blocked: "&cKamu tidak bisa menggunakan command ini saat sedang dalam pertempuran/spectator."
+  spectator-leave-arena: "&cSebagai spectator, kamu tidak diperbolehkan keluar dari batas region arena!"
+  banner-saved: "&aLokasi banner untuk wilayah {region} telah berhasil disimpan!"
+  banner-not-looking: "&cKamu harus melihat langsung ke sebuah block banner!"
+  banner-replaced: "&aBanner wilayah {region} telah berhasil diganti dengan desain Banner Guild kamu!"
+  not-holding-banner: "&cKamu harus memegang item Banner di tangan utama kamu!"
+  not-owning-guild: "&cWilayah ini bukan milik Guild kamu!"
+  no-guild-rank: "&cPerintah ini hanya dapat digunakan oleh pangkat Guild: {ranks}"
+  data-reloaded: "&aKonfigurasi dan data teritori berhasil dimuat ulang!"
+  periodic-reward-received: "&aKamu menerima &e{amount}x {item} &adari wilayah kekuasaan Guild!"
+  void-fall: "&cKamu terjatuh ke void dan dieliminasi sebagai spectator!"
+  
+  # Season Rating (SR)
+  sr-season-reset: "&aSeluruh poin Season Rating (SR) guild berhasil direset ke 0!"
+  sr-reward-received: "&aGuild kamu mendapatkan &e+{points} Season Rating (SR) &akarena menguasai &e{count} &awilayah!"
+  sr-reward-win-war: "&aGuild kamu mendapatkan &e+{points} Season Rating (SR) &akarena memenangkan pertempuran di wilayah &e{territory}&a!"
+  
+  # Simultaneous Attack & Arena Limits
+  simultaneous-attack-limit: "&cGuild kamu sudah memiliki {count} serangan teritori aktif! Selesaikan pertempuran sebelumnya terlebih dahulu."
+  arenas-full: "&cSemua arena pertempuran sedang digunakan. Silakan tunggu beberapa saat."
+  arena-full-guild: "&cKamu tidak ikut diteleportasi karena kapasitas maksimum pertarung guild di arena sudah penuh ({limit} pemain)."
+  
+  # War Toggle
+  war-toggle-on: "&aStatus war partisipasi kamu sekarang aktif! Kamu akan ikut diteleportasi saat war dimulai."
+  war-toggle-off: "&cStatus war partisipasi kamu sekarang nonaktif! Kamu tidak akan ikut diteleportasi."
+  war-toggle-disabled-msg: "&cKamu tidak ikut diteleportasi ke arena karena menonaktifkan partisipasi war (/war toggle)."
+  
+  # =========================================================================
+  # 1.1 PESAN SUB-COMMAND & LAYOUT LIST (Fleksibel menggunakan List/StringList)
+  # =========================================================================
+  only-players: "&cHanya pemain yang dapat menggunakan perintah ini."
+  banner-not-set: "&cBanner lokasi belum ditentukan oleh Admin untuk wilayah ini!"
+  banner-invalid-meta: "&cItem banner tidak memiliki metadata yang valid!"
+  region-not-registered: "&cWilayah region '{region}' tidak terdaftar di konfigurasi!"
+  usage-setbanner: "&cPenggunaan: /war setbanner <namaregion>"
+  usage-spectate: "&cPenggunaan: /war spectate <region_id>"
+  no-active-war: "&cTidak ada war aktif di region wilayah tersebut!"
+  spectator-joined: "&aKamu sekarang masuk ke spectator mode untuk wilayah &e{territory}&a."
+  spectator-quit: "&aKamu keluar dari mode spectator war."
+  spectator-not-in-war: "&cKamu tidak sedang dalam mode spectator war arena!"
+
+  # Layout menu /war allterr
+  allterr-layout:
+    - "&7&m---------------------------------"
+    - "&c&l🗺️ DAFTAR WILAYAH TERITORI 🗺️"
+    - "&7"
+    - "{entries}"
+    - "&7&m---------------------------------"
+  allterr-entry-format: " &e• &f{territory} &8» {owner}"
+  allterr-unclaimed: "&7Belum dikuasai"
+
+  # Layout menu /war topterr
+  topterr-layout:
+    - "&7&m---------------------------------"
+    - "&c&l🏆 PERINGKAT GUILD TERITORI 🏆"
+    - "&7"
+    - "{entries}"
+    - "&7&m---------------------------------"
+  topterr-entry-format: " &e{rank}. &b{guild} &8» &a{count} Wilayah"
+  topterr-empty: " &8- &7Belum ada wilayah yang dikuasai"
+
+  # Layout menu /war topsr
+  topsr-layout:
+    - "&8&m========================================"
+    - "            &6&lTOP SEASON RATING GUILD"
+    - "{entries}"
+    - "&8&m========================================"
+  topsr-entry-format: " &e{rank}. &b{guild} &8» &e{points} SR"
+  topsr-empty: " &8- &7Belum ada rating SR terdaftar"
+
+  # =========================================================================
+  # 2. PENGUMUMAN GUILD (Hanya dikirim ke anggota Guild Penyerang & Bertahan)
+  # =========================================================================
+  war-start-broadcast: "&eGuild &b{attacker} &etelah mendeklarasikan perang di wilayah &a{territory}&e! Gunakan &6/war info &euntuk detail lebih lanjut."
+  war-preparing: "&eWar akan segera dimulai dalam &6{time} &edetik!"
+  war-teleporting: "&eWaktu persiapan habis! Teleportasi ke arena pertempuran..."
+  not-enough-players: "&cWar dibatalkan karena tidak ada cukup pemain yang bertahan di wilayah ini."
+  sudden-death: "&c&l⚔️ SUDDEN DEATH! &eEfek Strength semua petarung meningkat ke Level &c{level}&e!"
+
+  # =========================================================================
+  # 3. SIARAN GLOBAL (Dikirim ke seluruh pemain di server)
+  # =========================================================================
+  war-win-broadcast: "&a&l[WIN] &eGuild &b{winner} &eberhasil merebut wilayah &a{territory} &edari kekuasaan &d{loser}&e!"
+  war-defend-broadcast: "&a&l[DEFEND] &eGuild &b{winner} &eberhasil mempertahankan wilayah &a{territory} &edari serangan &d{loser}&e!"
+
+# ┌──────────────────────────────────────────────────┐
+# │              PENGATURAN BOSSBAR COUNTDOWN        │
+# └──────────────────────────────────────────────────┘
+bossbar:
+  # Judul BossBar (Mendukung placeholder {time} dan {territory})
+  title: "&c&l⚔️ Persiapan War {territory}: {time} detik! ⚔️"
+  # Pilihan warna BossBar: PINK, BLUE, RED, GREEN, YELLOW, PURPLE, WHITE
+  color: "RED"
+  # Pilihan style BossBar: SOLID, SEGMENTED_6, SEGMENTED_10, SEGMENTED_12, SEGMENTED_20
+  style: "SOLID"
+
+
+# ┌──────────────────────────────────────────────────┐
+# │              PENGATURAN SCOREBOARD WAR (TAB)     │
+# └──────────────────────────────────────────────────┘
+# Integrasi dengan plugin TAB (oleh NEZNAMY) untuk mengubah Scoreboard saat bertarung di arena
+scoreboard:
+  enabled: true
+  title: "&c&l⚔️ WAR ARENA ⚔️"
+  lines:
+    - "&7&m-----------------------"
+    - "&f Wilayah: &a{territory}"
+    - "&f Sisa Waktu: &e{time_left}"
+    - ""
+    - "&c Regu Penyerang ({attacker_guild}):"
+    - "{attacker_players}"
+    - ""
+    - "&9 Regu Bertahan ({defender_guild}):"
+    - "{defender_players}"
+    - "&7&m-----------------------"
+  player-alive-format: " &8- &e{player}: &c{health} HP"
+  player-dead-format: " &8- &7{player}: &7☠ DEAD"
+
+# ┌──────────────────────────────────────────────────┐
+# │              PENGATURAN EFEK SUARA (SOUNDS)      │
+# └──────────────────────────────────────────────────┘
+# Konfigurasi efek suara untuk berbagai event pertempuran teritori.
+# Gunakan nama Sound resmi Bukkit (contoh: ENTITY_ENDERMAN_TELEPORT, UI_TOAST_CHALLENGE_COMPLETE)
+# Format: "NAMA_SUARA;volume;pitch"
+sounds:
+  # Saat war dideklarasikan/dimulai persiapan (dikirim ke guild penyerang & bertahan)
+  war-declare: "ENTITY_ENDER_DRAGON_GROWL;1.0;0.8"
+
+  # Efek suara detik-detik terakhir hitung mundur persiapan war (5 detik terakhir)
+  countdown-tick: "BLOCK_NOTE_BLOCK_PLING;1.0;1.5"
+
+  # Saat persiapan war selesai dan pemain diteleportasi ke arena
+  war-teleport: "ENTITY_ENDERMAN_TELEPORT;1.0;1.0"
+  
+  # Saat pintu arena dibuka / pertarungan dimulai (Raid Horn)
+  war-start: "EVENT_RAID_HORN;1.0;1.0"
+  
+  # Efek suara saat level Strength Sudden Death meningkat
+  sudden-death-boost: "ENTITY_LIGHTNING_BOLT_THUNDER;0.8;1.0"
+  
+  # Saat Guild memenangkan pertempuran (dikirim ke seluruh anggota guild pemenang)
+  war-win: "UI_TOAST_CHALLENGE_COMPLETE;1.0;1.0"
+  
+  # Saat Guild kalah dalam pertempuran (dikirim ke seluruh anggota guild yang kalah)
+  war-lose: "ENTITY_WITHER_DEATH;0.8;0.8"
+
+# ┌──────────────────────────────────────────────────┐
+# │           SISTEM SEASON RATING (SR) GUILD        │
+# └──────────────────────────────────────────────────┘
+season-rating:
+  enabled: true
+  # Interval pembagian poin SR ke guild pemilik wilayah (dalam menit)
+  interval-minutes: 10
+  # Jumlah poin SR yang didapat per wilayah yang dikuasai secara periodik
+  points-per-territory: 5
+  # Jumlah poin SR instan yang didapat ketika memenangkan war
+  win-war-sr-reward: 25
+
+
+# ┌──────────────────────────────────────────────────┐
+# │           FORMAT PLACEHOLDER (PLACEHOLDERAPI)    │
+# └──────────────────────────────────────────────────┘
+# Konfigurasi format tampilan untuk placeholder %war_<nama_region>%
+placeholder-formats:
+  # Mode tampilan nama guild pada placeholder & sistem war
+  # Pilihan: "name" (Nama Guild) atau "prefix" (Prefix Guild jika didukung plugin)
+  guild-mode: "name"
+
+  # Tampilan jika wilayah belum dikuasai oleh guild mana pun
+  unclaimed: "&7Territory ini belum dikuasai"
+  
+  # Tampilan jika wilayah dikuasai oleh suatu guild (mendukung {owner} dan {tier})
+  claimed: "&eTerritory ini dikuasai oleh &b{owner} &e(Tier {tier})"

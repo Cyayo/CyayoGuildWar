@@ -1,0 +1,153 @@
+# ┌──────────────────────────────────────────────────┐
+# │              PENGATURAN GUI DETAIL WILAYAH       │
+# └──────────────────────────────────────────────────┘
+# Konfigurasi inventori Chest GUI untuk perintah /war info
+
+# Judul Menu GUI (Mendukung placeholder {territory})
+title: "&8Detail Wilayah: {territory}"
+# Ukuran GUI (Kelipatan 9, min 9, max 54)
+size: 27
+
+# A. Item Informasi Umum Wilayah
+info-item:
+  material: "MAP"
+  slot: 10
+  name: "&6&lInformasi Wilayah"
+  lore:
+    - "&7Nama Wilayah: &e{display_name}"
+    - "&7Region WG: &f{region_id}"
+    - "&7Dikuasai oleh: &b{owner}"
+    - "&7Status: {status}"
+  status-cooldown: "&cMasa Cooldown ({time})"
+  status-active: "&aDapat Diserang"
+  status-unclaimed: "&aDapat Diklaim Instan"
+  owner-none: "Belum ada pemilik"
+
+# B. Item Informasi Buff & Efek Wilayah
+buffs-item:
+  material: "BREWING_STAND"
+  slot: 13
+  name: "&a&lEfek & Bonus Wilayah"
+  lore-header:
+    - "&7Keuntungan yang didapat jika menguasai wilayah ini:"
+    - ""
+  # Lore tambahan diatur per-territory di file territory (buff-lore)
+  lore-empty: " &8- &7Tidak ada efek/buff aktif di teritori ini."
+
+# C. Tombol Aksi (Tergantung status kepemilikan teritori)
+action-item:
+  slot: 16
+  claim:
+    material: "GREEN_WOOL"
+    name: "&a&lKlaim Wilayah"
+    lore:
+      - "&7Klik untuk mengklaim wilayah ini"
+      - "&7secara instan karena belum ada pemilik."
+  attack:
+    material: "RED_WOOL"
+    name: "&c&lDeklarasi Perang"
+    lore:
+      - "&7Klik di sini untuk memulai serangan"
+      - "&7terhadap Guild &b{owner}&7."
+      - ""
+      - "&c&lPERHATIAN:"
+      - "&7Anggota regu harus berada di wilayah ini"
+      - "&7sebelum timer persiapan war berakhir!"
+  owned:
+    material: "BLUE_WOOL"
+    name: "&b&lWilayah Milikmu"
+    lore:
+      - "&7Guild kamu menguasai wilayah ini."
+      - "&7Pegang Banner lalu ketik &6/war banner"
+      - "&7untuk merubah desain banner wilayah!"
+
+# D. Item Pengisi Slot Kosong (Background)
+filler:
+  mode: "custom"
+  material: "GRAY_STAINED_GLASS_PANE"
+  name: " "
+  # Border untuk GUI size 27 (pinggir saja)
+  slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
+
+# ┌──────────────────────────────────────────────────┐
+# │              PENGATURAN GUI STATS GUILD          │
+# └──────────────────────────────────────────────────┘
+# Konfigurasi inventori Chest GUI untuk perintah /war stats
+stats-gui:
+  title: "&8Statistik Guild: {guild}"
+  size: 45
+  # Filler konfigurasi untuk stats GUI
+  filler:
+    mode: "custom"
+    material: "GRAY_STAINED_GLASS_PANE"
+    name: " "
+    # Border untuk GUI size 45 (pinggir saja)
+    slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44]
+  banner-item:
+    slot: 13
+    name: "&6&lBanner Guild Kamu"
+    lore:
+      - "&7"
+      - "&eKlik untuk mengubah banner guild."
+      - "&e(Pegang banner di tangan kamu)"
+      - "&7"
+      - "&c* Catatan: Membutuhkan izin kelola banner."
+  territory-item:
+    slot: 22
+    material: "FILLED_MAP"
+    name: "&a&lWilayah Dikuasai"
+    lore-header:
+      - "&7Berikut wilayah yang dikuasai guild:"
+      - ""
+    lore-entry: " &8- &e{territory} &8| {status}"
+    lore-empty: " &8- &cBelum menguasai wilayah apapun."
+    lore-footer:
+      - ""
+      - "&eKlik untuk melihat detail wilayah!"
+    status-cooldown: "&cCooldown ({time})"
+    status-ready: "&aSiap"
+
+# ┌──────────────────────────────────────────────────┐
+# │          PENGATURAN GUI DETAIL TERRITORY GUILD   │
+# └──────────────────────────────────────────────────┘
+territory-detail-gui:
+  title: "&8Wilayah Guild: {guild}"
+  size: 54
+  # Slot 4 = tengah atas (baris 0, kolom 4)
+  info-item:
+    slot: 4
+    material: "BOOK"
+    name: "&6&lInfo Guild: &e{guild}"
+    lore:
+      - "&7"
+      - "&7Tier Guild: &e{tier}"
+      - "&7Role Kamu: &b{role}"
+      - "&7Wilayah Dikuasai: &a{count} wilayah"
+      - "&7"
+  territory-item:
+    material: "MAP"
+    name: "&a&l{territory}"
+    # Custom slot mana saja yang akan diisi item territory (0, 1, 2, dst)
+    slots: [10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42, 43]
+    lore:
+      - "&7"
+      - "&7Region WG: &f{region_id}"
+      - "&7Status: {status}"
+      - "&7Koordinat Banner: &e{coords}"
+    status-cooldown: "&cMasa Cooldown ({time})"
+    status-ready: "&aSiap Bertempur"
+    coords-empty: "&cBelum diatur"
+  # Slot 49 = tengah bawah (baris 5, kolom 4)
+  back-item:
+    slot: 49
+    material: "ARROW"
+    name: "&c&l\u00ab Kembali"
+    lore:
+      - "&7Klik untuk kembali ke menu stats guild."
+  # Filler konfigurasi untuk territory detail GUI
+  filler:
+    mode: "custom" # none / all / border / custom
+    material: "GRAY_STAINED_GLASS_PANE"
+    name: " "
+    # Border untuk GUI size 54 (pinggir saja)
+    slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
